@@ -36,6 +36,8 @@ begin
 
     until check = 0;
     
+    broken := true;
+    
     for current := 1 to 4 do
     begin
         if attempt[current] = code[current] then
@@ -63,11 +65,11 @@ begin
     randomize;
     
     clrscr;
-    
+
     for current := 1 to 4 do
     begin
         code[current] := random(9);
-        write(code[current]); {Writes out code for purposes of debugging.}
+        write(code[current]);
     end;
     
     writeln;
@@ -86,17 +88,19 @@ begin
     repeat
         main;
         guesses := guesses + 1;
-        if guesses < 13 then
+        
+        if broken = false then
         begin
-            writeln('You have ', 12 - guesses, ' attempts remaining.');
-            writeln;
-            writeln('Write your next attempt...');
-        end
-        else
-        begin
-            writeln('You ran out of attempts. Sorry you lost!');
-            readln;
+            if guesses < 12 then
+            begin
+                writeln('You have ', 12 - guesses, ' attempts remaining.');
+                writeln;
+                writeln('Write your next attempt...');
+            end
+            else writeln('You ran out of attempts. Sorry you lost!');
         end;
     until (broken = true) xor (guesses > 11);
+    
+    readln;
 
 end.
