@@ -63,11 +63,11 @@ begin
     randomize;
     
     clrscr;
-
+    
     for current := 1 to 4 do
     begin
         code[current] := random(9);
-        write(code[current]);
+        write(code[current]); {Writes out code for purposes of debugging.}
     end;
     
     writeln;
